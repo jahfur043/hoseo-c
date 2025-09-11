@@ -1,0 +1,31 @@
+#include <stdio.h>
+
+int main() {
+    int n;
+    int 입고[100], 판매[100], 재고[100];
+    int id;
+
+    scanf("%d", &n);
+
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &입고[i]);
+    }
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &판매[i]);
+    }
+    
+    scanf("%d", &id);
+    
+    for (int i = 0; i < n; i++) {
+        재고[i] = 입고[i] - 판매[i];
+        if (재고[i] < 0) 재고[i] = 0;
+    }
+    
+    printf("%d\n", 재고[id - 1]);
+   
+    for (int i = 0; i < n; i++) {
+        printf("%d ", 재고[i]);
+    }
+
+    return 0;
+}
