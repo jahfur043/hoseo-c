@@ -1,0 +1,54 @@
+#include <stdio.h>
+
+int main() {
+    int n;
+    scanf("%d", &n);
+
+    int 입고[100], 판매[100], 재고[100];
+    int 총입고 = 0, 총판매 = 0;
+
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &입고[i]);
+        총입고 += 입고[i];
+    }
+
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &판매[i]);
+        재고[i] = 입고[i] - 판매[i];
+        총판매 += 판매[i];
+    }
+
+    printf("재고수량 : ");
+    for (int i = 0; i < n; i++) {
+        printf("%d ", 재고[i]);
+    }
+    printf("\n");
+
+    double 판매율 = (double)총판매 / 총입고 * 100.0;
+    printf("총 판매량 : %d (판매율 %.2f%%)\n", 총판매, 판매율);
+
+    int 최대 = 판매[0], 최소 = 판매[0];
+    int 최대ID = 0, 최소ID = 0;
+
+    for (int i = 1; i < n; i++) {
+        if (판매[i] > 최대) {
+            최대 = 판매[i];
+            최대ID = i;
+        }
+        if (판매[i] < 최소) {
+            최소 = 판매[i];
+            최소ID = i;
+        }
+    }
+
+    printf("가장 많이 판매된 상품 : ID %d, 판매량 %d\n", 최대ID+1, 최대);
+    printf("가장 적게 판매된 상품 : ID %d, 판매량 %d\n", 최소ID+1, 최소);
+
+    for (int i = 0; i < n; i++) {
+        if (재고[i] <= 2) {
+            printf("상품 ID %d : 재고부족(%d)\n", i+1, 재고[i]);
+        }
+    }
+
+    return 0;
+}
